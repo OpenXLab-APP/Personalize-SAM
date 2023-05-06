@@ -13,20 +13,6 @@ from show import *
 from per_segment_anything import sam_model_registry, SamPredictor
 
 
-class ImageMask(gr.components.Image):
-    """
-    Sets: source="canvas", tool="sketch"
-    """
-
-    is_template = True
-
-    def __init__(self, **kwargs):
-        super().__init__(source="upload", tool="sketch", interactive=True, **kwargs)
-
-    def preprocess(self, x):
-        return super().preprocess(x)
-
-
 class Mask_Weights(nn.Module):
     def __init__(self):
         super().__init__()
@@ -504,7 +490,7 @@ main = gr.Interface(
 main_scribble = gr.Interface(
     fn=inference_scribble,
     inputs=[
-        ImageMask(label="[Stroke] Draw on Image", brush_radius=4),
+        gr.ImageMask(label="[Stroke] Draw on Image", brush_radius=4),
         gr.Image(label="test image1"),
         gr.Image(label="test image2"),
     ],
