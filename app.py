@@ -543,6 +543,8 @@ main_finetune = gr.Interface(
 )
 
 gr.TabbedInterface(
-    [main, main_scribble, main_finetune],
-    ["Personalize-SAM", "Personalize-SAM-Scribble", "Personalize-SAM-F"],
+    # [main, main_scribble, main_finetune],
+    [main, main_finetune],
+    ["Personalize-SAM", "Personalize-SAM-F"],
+    # ["Personalize-SAM", "Personalize-SAM-Scribble", "Personalize-SAM-F"],
 ).queue.launch()
