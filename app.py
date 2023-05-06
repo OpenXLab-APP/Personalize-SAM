@@ -542,12 +542,7 @@ main_finetune = gr.Interface(
     ]
 )
 
-
-demo = gr.Blocks()
-with demo:
-    gr.TabbedInterface(
-        [main, main_scribble, main_finetune],
-        ["Personalize-SAM", "Personalize-SAM-Scribble", "Personalize-SAM-F"],
-    )
-
-demo.launch()
+gr.TabbedInterface(
+    [main, main_scribble, main_finetune],
+    ["Personalize-SAM", "Personalize-SAM-Scribble", "Personalize-SAM-F"],
+).queue.launch()
