@@ -2,3 +2,4 @@ matplotlib
 torch
 torchvision
 opencv-python
+gradio==3.27.0
