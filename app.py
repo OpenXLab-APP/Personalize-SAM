@@ -499,6 +499,7 @@ main = gr.Interface(
     ]
 )
 
+"""
 main_scribble = gr.Interface(
     fn=inference_scribble,
     inputs=[
@@ -519,6 +520,7 @@ main_scribble = gr.Interface(
         ["./examples/duck_toy_00.jpg", "./examples/duck_toy_01.jpg", "./examples/duck_toy_02.jpg"],
     ]
 )
+"""
 
 main_finetune = gr.Interface(
     fn=inference_finetune,
