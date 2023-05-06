@@ -550,4 +550,4 @@ with demo:
         ["Personalize-SAM", "Personalize-SAM-Scribble", "Personalize-SAM-F"],
     )
 
-demo.launch(share=True)
+demo.launch()
