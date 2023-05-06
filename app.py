@@ -504,7 +504,7 @@ main = gr.Interface(
 main_scribble = gr.Interface(
     fn=inference_scribble,
     inputs=[
-        gr.ImageMask(label="[Stroke] Draw on Image", brush_radius=4),
+        ImageMask(label="[Stroke] Draw on Image", brush_radius=4),
         gr.Image(label="test image1"),
         gr.Image(label="test image2"),
     ],
