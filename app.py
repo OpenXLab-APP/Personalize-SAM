@@ -88,8 +88,8 @@ def calculate_sigmoid_focal_loss(inputs, targets, num_masks = 1, alpha: float = 
 
 def inference(ic_image, ic_mask, image1, image2):
     # in context image and mask
-    ic_image = cv2.cvtColor(ic_image, cv2.COLOR_BGR2RGB)
-    ic_make = cv2.cvtColor(ic_image,cv2.COLOR_BGR2RGB)
+    ic_image = np.array(ic_image.convert("RGB"))
+    ic_mask = np.array(ic_mask.convert("RGB"))
 
     sam_type, sam_ckpt = 'vit_h', 'sam_vit_h_4b8939.pth'
     sam = sam_model_registry[sam_type](checkpoint=sam_ckpt).cuda()
@@ -114,7 +114,7 @@ def inference(ic_image, ic_mask, image1, image2):
 
     for test_image in [image1, image2]:
         print("======> Testing Image" )
-        test_image = cv2.cvtColor(test_image, cv2.COLOR_BGR2RGB)
+        test_image = np.array(test_image.convert("RGB"))
 
         # Image feature encoding
         predictor.set_image(test_image)
@@ -188,8 +188,8 @@ def inference_scribble(image, image1, image2):
     # in context image and mask
     ic_image = image["image"]
     ic_mask = image["mask"]
-    ic_image = cv2.cvtColor(ic_image, cv2.COLOR_BGR2RGB)
-    ic_make = cv2.cvtColor(ic_image,cv2.COLOR_BGR2RGB)
+    ic_image = np.array(ic_image.convert("RGB"))
+    ic_mask = np.array(ic_mask.convert("RGB"))
 
     sam_type, sam_ckpt = 'vit_h', 'sam_vit_h_4b8939.pth'
     sam = sam_model_registry[sam_type](checkpoint=sam_ckpt).cuda()
@@ -214,7 +214,7 @@ def inference_scribble(image, image1, image2):
 
     for test_image in [image1, image2]:
         print("======> Testing Image" )
-        test_image = cv2.cvtColor(test_image, cv2.COLOR_BGR2RGB)
+        test_image = np.array(test_image.convert("RGB"))
 
         # Image feature encoding
         predictor.set_image(test_image)
@@ -286,8 +286,8 @@ def inference_scribble(image, image1, image2):
 
 def inference_finetune(ic_image, ic_mask, image1, image2):
     # in context image and mask
-    ic_image = cv2.cvtColor(ic_image, cv2.COLOR_BGR2RGB)
-    ic_make = cv2.cvtColor(ic_image,cv2.COLOR_BGR2RGB)
+    ic_image = np.array(ic_image.convert("RGB"))
+    ic_mask = np.array(ic_mask.convert("RGB"))
 
     gt_mask = torch.tensor(ic_mask)[:, :, 0] > 0
     gt_mask = gt_mask.float().unsqueeze(0).flatten(1).cuda()
@@ -377,7 +377,7 @@ def inference_finetune(ic_image, ic_mask, image1, image2):
     output_image = []
 
     for test_image in [image1, image2]:
-        test_image = cv2.cvtColor(test_image, cv2.COLOR_BGR2RGB)
+        test_image = np.array(test_image.convert("RGB"))
 
         # Image feature encoding
         predictor.set_image(test_image)
@@ -466,14 +466,14 @@ description = """
 main = gr.Interface(
     fn=inference,
     inputs=[
-        gr.Image(label="in context image",),
-        gr.Image(label="in context mask"),
-        gr.Image(label="test image1"),
-        gr.Image(label="test image2"),
+        gr.Image(label="in context image", type='pil'),
+        gr.Image(label="in context mask", type='pil'),
+        gr.Image(label="test image1", type='pil'),
+        gr.Image(label="test image2", type='pil'),
     ],
     outputs=[
-        gr.Image(label="output image1").style(height=256, width=256),
-        gr.Image(label="output image2").style(height=256, width=256),
+        gr.Image(label="output image1", type='pil').style(height=256, width=256),
+        gr.Image(label="output image2", type='pil').style(height=256, width=256),
     ],
     allow_flagging="never",
     cache_examples=False,
@@ -490,13 +490,13 @@ main = gr.Interface(
 main_scribble = gr.Interface(
     fn=inference_scribble,
     inputs=[
-        gr.ImageMask(label="[Stroke] Draw on Image"),
-        gr.Image(label="test image1"),
-        gr.Image(label="test image2"),
+        gr.ImageMask(label="[Stroke] Draw on Image", brush_radius=4, type='pil'),
+        gr.Image(label="test image1", type='pil'),
+        gr.Image(label="test image2", type='pil'),
     ],
     outputs=[
-        gr.Image(label="output image1").style(height=256, width=256),
-        gr.Image(label="output image2").style(height=256, width=256),
+        gr.Image(label="output image1", type='pil').style(height=256, width=256),
+        gr.Image(label="output image2", type='pil').style(height=256, width=256),
     ],
     allow_flagging="never",
     cache_examples=False,
@@ -510,17 +510,18 @@ main_scribble = gr.Interface(
 )
 """
 
+
 main_finetune = gr.Interface(
     fn=inference_finetune,
     inputs=[
-        gr.Image(label="in context image",),
-        gr.Image(label="in context mask"),
-        gr.Image(label="test image1"),
-        gr.Image(label="test image2"),
+        gr.Image(label="in context image", type='pil'),
+        gr.Image(label="in context mask", type='pil'),
+        gr.Image(label="test image1", type='pil'),
+        gr.Image(label="test image2", type='pil'),
     ],
     outputs=[
-        gr.Image(label="output image1").style(height=256, width=256),
-        gr.Image(label="output image2").style(height=256, width=256),
+        gr.Image(label="output image1", type='pil').style(height=256, width=256),
+        gr.Image(label="output image2", type='pil').style(height=256, width=256),
     ],
     allow_flagging="never",
     cache_examples=False,
