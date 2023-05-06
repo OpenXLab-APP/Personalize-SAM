@@ -543,10 +543,13 @@ main_finetune = gr.Interface(
         ["./examples/duck_toy_00.jpg", "./examples/duck_toy_00.png", "./examples/duck_toy_01.jpg", "./examples/duck_toy_02.jpg"],
     ]
 )
+demo = gr.Blocks()
+with demo:
+    gr.TabbedInterface(
+         # [main, main_scribble, main_finetune],
+        [main, main_finetune],
+        ["Personalize-SAM", "Personalize-SAM-F"],
+        # ["Personalize-SAM", "Personalize-SAM-Scribble", "Personalize-SAM-F"],
+    )
 
-gr.TabbedInterface(
-    # [main, main_scribble, main_finetune],
-    [main, main_finetune],
-    ["Personalize-SAM", "Personalize-SAM-F"],
-    # ["Personalize-SAM", "Personalize-SAM-Scribble", "Personalize-SAM-F"],
-).launch()
+demo.launch()
