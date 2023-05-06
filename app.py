@@ -486,8 +486,8 @@ main = gr.Interface(
         gr.Image(type="pil", label="test image2"),
     ],
     outputs=[
-        gr.outputs.Image(type="pil", label="output image1"),
-        gr.outputs.Image(type="pil", label="output image2"),
+        gr.components.Image(type="pil", label="output image1"),
+        gr.components.Image(type="pil", label="output image2"),
     ],
     allow_flagging="never",
     title="Personalize Segment Anything Model with 1 Shot",
@@ -507,8 +507,8 @@ main_scribble = gr.Interface(
         gr.Image(type="pil", label="test image2"),
     ],
     outputs=[
-        gr.outputs.Image(type="pil", label="output image1"),
-        gr.outputs.Image(type="pil", label="output image2"),
+        gr.components.Image(type="pil", label="output image1"),
+        gr.components.Image(type="pil", label="output image2"),
     ],
     allow_flagging="never",
     title="Personalize Segment Anything Model with 1 Shot",
