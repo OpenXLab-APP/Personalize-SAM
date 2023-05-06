@@ -480,16 +480,17 @@ description = """
 main = gr.Interface(
     fn=inference,
     inputs=[
-        gr.Image(type="pil", label="in context image",),
-        gr.Image(type="pil", label="in context mask"),
-        gr.Image(type="pil", label="test image1"),
-        gr.Image(type="pil", label="test image2"),
+        gr.Image(label="in context image",),
+        gr.Image(label="in context mask"),
+        gr.Image(label="test image1"),
+        gr.Image(label="test image2"),
     ],
     outputs=[
-        gr.components.Image(type="pil", label="output image1"),
-        gr.components.Image(type="pil", label="output image2"),
+        gr.Image(label="output image1").style(height=256, width=256),
+        gr.Image(label="output image2").style(height=256, width=256),
     ],
     allow_flagging="never",
+    cache_examples=False,
     title="Personalize Segment Anything Model with 1 Shot",
     description=description,
     examples=[
@@ -503,15 +504,16 @@ main = gr.Interface(
 main_scribble = gr.Interface(
     fn=inference_scribble,
     inputs=[
-        gr.ImageMask(label="[Stroke] Draw on Image", type="pil"),
+        gr.ImageMask(label="[Stroke] Draw on Image", brush_radius=4),
         gr.Image(type="pil", label="test image1"),
         gr.Image(type="pil", label="test image2"),
     ],
     outputs=[
-        gr.components.Image(type="pil", label="output image1"),
-        gr.components.Image(type="pil", label="output image2"),
+        gr.Image(type="pil", label="output image1").style(height=256, width=256),
+        gr.Image(type="pil", label="output image2").style(height=256, width=256),
     ],
     allow_flagging="never",
+    cache_examples=False,
     title="Personalize Segment Anything Model with 1 Shot",
     description=description,
     examples=[
@@ -525,16 +527,17 @@ main_scribble = gr.Interface(
 main_finetune = gr.Interface(
     fn=inference_finetune,
     inputs=[
-        gr.Image(type="pil", label="in context image"),
-        gr.Image(type="pil", label="in context mask"),
-        gr.Image(type="pil", label="test image1"),
-        gr.Image(type="pil", label="test image2"),
+        gr.Image(label="in context image",),
+        gr.Image(label="in context mask"),
+        gr.Image(label="test image1"),
+        gr.Image(label="test image2"),
     ],
     outputs=[
-        gr.components.Image(type="pil", label="output image1"),
-        gr.components.Image(type="pil", label="output image2"),
+        gr.Image(label="output image1").style(height=256, width=256),
+        gr.Image(label="output image2").style(height=256, width=256),
     ],
     allow_flagging="never",
+    cache_examples=False,
     title="Personalize Segment Anything Model with 1 Shot",
     description=description,
     examples=[
@@ -552,4 +555,4 @@ with demo:
         ["Personalize-SAM", "Personalize-SAM-Scribble", "Personalize-SAM-F"],
     )
 
-demo.launch()
+demo.launch(enable_queue=False)
