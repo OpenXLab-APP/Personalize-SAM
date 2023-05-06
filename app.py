@@ -505,12 +505,12 @@ main_scribble = gr.Interface(
     fn=inference_scribble,
     inputs=[
         gr.ImageMask(label="[Stroke] Draw on Image", brush_radius=4),
-        gr.Image(type="pil", label="test image1"),
-        gr.Image(type="pil", label="test image2"),
+        gr.Image(label="test image1"),
+        gr.Image(label="test image2"),
     ],
     outputs=[
-        gr.Image(type="pil", label="output image1").style(height=256, width=256),
-        gr.Image(type="pil", label="output image2").style(height=256, width=256),
+        gr.Image(label="output image1").style(height=256, width=256),
+        gr.Image(label="output image2").style(height=256, width=256),
     ],
     allow_flagging="never",
     cache_examples=False,
