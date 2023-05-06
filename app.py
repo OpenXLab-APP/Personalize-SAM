@@ -106,8 +106,8 @@ def inference(ic_image, ic_mask, image1, image2):
     ic_mask = np.array(ic_mask.convert("RGB"))
 
     sam_type, sam_ckpt = 'vit_h', 'sam_vit_h_4b8939.pth'
-    # sam = sam_model_registry[sam_type](checkpoint=sam_ckpt).cuda()
-    sam = sam_model_registry[sam_type](checkpoint=sam_ckpt)
+    sam = sam_model_registry[sam_type](checkpoint=sam_ckpt).cuda()
+    # sam = sam_model_registry[sam_type](checkpoint=sam_ckpt)
     predictor = SamPredictor(sam)
 
     # Image features encoding
@@ -206,8 +206,8 @@ def inference_scribble(image, image1, image2):
     ic_mask = np.array(ic_mask.convert("RGB"))
 
     sam_type, sam_ckpt = 'vit_h', 'sam_vit_h_4b8939.pth'
-    # sam = sam_model_registry[sam_type](checkpoint=sam_ckpt).cuda()
-    sam = sam_model_registry[sam_type](checkpoint=sam_ckpt)
+    sam = sam_model_registry[sam_type](checkpoint=sam_ckpt).cuda()
+    # sam = sam_model_registry[sam_type](checkpoint=sam_ckpt)
     predictor = SamPredictor(sam)
 
     # Image features encoding
@@ -304,12 +304,12 @@ def inference_finetune(ic_image, ic_mask, image1, image2):
     ic_mask = np.array(ic_mask.convert("RGB"))
 
     gt_mask = torch.tensor(ic_mask)[:, :, 0] > 0
-    # gt_mask = gt_mask.float().unsqueeze(0).flatten(1).cuda()
-    gt_mask = gt_mask.float().unsqueeze(0).flatten(1)
+    gt_mask = gt_mask.float().unsqueeze(0).flatten(1).cuda()
+    # gt_mask = gt_mask.float().unsqueeze(0).flatten(1)
 
     sam_type, sam_ckpt = 'vit_h', 'sam_vit_h_4b8939.pth'
-    # sam = sam_model_registry[sam_type](checkpoint=sam_ckpt).cuda()
-    sam = sam_model_registry[sam_type](checkpoint=sam_ckpt)
+    sam = sam_model_registry[sam_type](checkpoint=sam_ckpt).cuda()
+    # sam = sam_model_registry[sam_type](checkpoint=sam_ckpt)
     for name, param in sam.named_parameters():
         param.requires_grad = False
     predictor = SamPredictor(sam)
@@ -347,8 +347,8 @@ def inference_finetune(ic_image, ic_mask, image1, image2):
 
     print('======> Start Training')
     # Learnable mask weights
-    # mask_weights = Mask_Weights().cuda()
-    mask_weights = Mask_Weights()
+    mask_weights = Mask_Weights().cuda()
+    # mask_weights = Mask_Weights()
     mask_weights.train()
     train_epoch = 1000
     optimizer = torch.optim.AdamW(mask_weights.parameters(), lr=1e-3, eps=1e-4)
