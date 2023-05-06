@@ -350,7 +350,7 @@ def inference_finetune(ic_image, ic_mask, image1, image2):
     mask_weights = Mask_Weights().cuda()
     # mask_weights = Mask_Weights()
     mask_weights.train()
-    train_epoch = 1000
+    train_epoch = 100
     optimizer = torch.optim.AdamW(mask_weights.parameters(), lr=1e-3, eps=1e-4)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, train_epoch)
 
@@ -549,4 +549,4 @@ gr.TabbedInterface(
     [main, main_finetune],
     ["Personalize-SAM", "Personalize-SAM-F"],
     # ["Personalize-SAM", "Personalize-SAM-Scribble", "Personalize-SAM-F"],
-).queue.launch()
+).launch()
