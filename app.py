@@ -499,7 +499,7 @@ main = gr.Interface(
     ]
 )
 
-"""
+
 main_scribble = gr.Interface(
     fn=inference_scribble,
     inputs=[
@@ -520,7 +520,7 @@ main_scribble = gr.Interface(
         ["./examples/duck_toy_00.jpg", "./examples/duck_toy_01.jpg", "./examples/duck_toy_02.jpg"],
     ]
 )
-"""
+
 
 main_finetune = gr.Interface(
     fn=inference_finetune,
@@ -546,10 +546,10 @@ main_finetune = gr.Interface(
 demo = gr.Blocks()
 with demo:
     gr.TabbedInterface(
-         # [main, main_scribble, main_finetune],
-        [main, main_finetune],
-        ["Personalize-SAM", "Personalize-SAM-F"],
-        # ["Personalize-SAM", "Personalize-SAM-Scribble", "Personalize-SAM-F"],
+        [main, main_scribble, main_finetune],
+        # [main, main_finetune],
+        # ["Personalize-SAM", "Personalize-SAM-F"],
+        ["Personalize-SAM", "Personalize-SAM-Scribble", "Personalize-SAM-F"],
     )
 
 demo.launch()
