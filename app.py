@@ -541,4 +541,3 @@ with demo:
     )
 
 demo.launch(enable_queue=False)
-
