@@ -466,8 +466,8 @@ description = """
 main = gr.Interface(
     fn=inference,
     inputs=[
-        gr.Image(label="in context image", type='pil'),
-        gr.Image(label="in context mask", type='pil'),
+        gr.Image(label="one-shot image", type='pil'),
+        gr.Image(label="one-shot mask", type='pil'),
         gr.Image(label="test image1", type='pil'),
         gr.Image(label="test image2", type='pil'),
     ],
@@ -514,8 +514,8 @@ main_scribble = gr.Interface(
 main_finetune = gr.Interface(
     fn=inference_finetune,
     inputs=[
-        gr.Image(label="in context image", type='pil'),
-        gr.Image(label="in context mask", type='pil'),
+        gr.Image(label="one-shot image", type='pil'),
+        gr.Image(label="one-shot mask", type='pil'),
         gr.Image(label="test image1", type='pil'),
         gr.Image(label="test image2", type='pil'),
     ],
@@ -537,9 +537,7 @@ demo = gr.Blocks()
 with demo:
     gr.TabbedInterface(
         [main, main_scribble, main_finetune],
-        # [main, main_finetune],
-        # ["Personalize-SAM", "Personalize-SAM-F"],
-        ["Personalize-SAM", "Personalize-SAM-Scribble", "Personalize-SAM-F"],
+        ["PerSAM", " PerSAM-Scribble", "PerSAM-F"],
     )
 
 demo.launch(enable_queue=False)
