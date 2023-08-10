@@ -11,7 +11,10 @@ from torch.nn import functional as F
 
 from show import *
 from per_segment_anything import sam_model_registry, SamPredictor
+from openxlab.model import download
 
+download(model_repo='RenRuiZhang/sam_vit_h_4b8939', 
+model_name='sam_vit_h_4b8939')
 
 class Mask_Weights(nn.Module):
     def __init__(self):
